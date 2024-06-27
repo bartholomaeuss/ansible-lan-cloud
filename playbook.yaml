@@ -1,0 +1,96 @@
+- name: Install Docker engine
+  hosts:
+    - test
+    - xprime
+    - xcloud
+    - nas
+  become: true
+  tasks:
+    - name: Include tasks
+      ansible.builtin.include_tasks: ./tasks/docker-engine-install.yaml
+
+- name: Add drives
+  hosts:
+    - nas
+  become: true
+  tasks:
+    - name: Include tasks
+      ansible.builtin.include_tasks: ./tasks/my-hdd-config.yaml
+
+- name: Run Docker container with samba
+  hosts:
+    - nas
+  become: true
+  tasks:
+    - name: Include tasks
+      ansible.builtin.include_tasks: ./tasks/my-samba-container.yaml
+
+- name: Run Docker container with node_exporter
+  hosts:
+    - test
+    - xprime
+    - xcloud
+    - nas
+  become: true
+  tasks:
+    - name: Include tasks
+      ansible.builtin.include_tasks: ./tasks/my-node_exporter-container.yaml
+
+- name: Run Docker container with duplicati
+  hosts:
+    - nas
+  become: true
+  tasks:
+    - name: Include tasks
+      ansible.builtin.include_tasks: ./tasks/my-duplicati-container.yaml
+
+- name: Run Docker container with prometheus
+  hosts:
+    - xcloud
+  become: true
+  tasks:
+    - name: Include tasks
+      ansible.builtin.include_tasks: ./tasks/my-prometheus-container.yaml
+
+- name: Run Docker container with grafana
+  hosts:
+    - xcloud
+  become: true
+  tasks:
+    - name: Include tasks
+      ansible.builtin.include_tasks: ./tasks/my-grafana-container.yaml
+
+- name: Run Docker container with jellyfin
+  hosts:
+    - nas
+  become: true
+  tasks:
+    - name: Include tasks
+      ansible.builtin.include_tasks: ./tasks/my-jellyfin-container.yaml
+
+- name: Run Docker container with mysql (wordpress)
+  hosts:
+    - xcloud
+    - xxtest
+  become: true
+  tasks:
+    - name: Include tasks
+      ansible.builtin.include_tasks: ./tasks/my-mysql-container.yaml
+
+- name: Run Docker container with wordpress
+  hosts:
+    - xcloud
+    - xxtest
+  become: true
+  tasks:
+    - name: Include tasks
+      ansible.builtin.include_tasks: ./tasks/my-wordpress-container.yaml
+
+- name: Run Docker container with neo4j
+  hosts:
+    - xcloud
+    - xxtest
+  become: true
+  tasks:
+    - name: Include tasks
+      ansible.builtin.include_tasks: ./tasks/my-neo4j-container.yaml

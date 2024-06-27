@@ -1,0 +1,14 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          spindown hdd
+# Required-Start:    $local_fs
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Set APM Level for /dev/sdb1
+# Description:       Init script to set APM Level for /dev/sdb1 using hdparm
+### END INIT INFO
+#
+# Author:       "Bartholomaeuss"
+#
+sudo hdparm -S 60 /dev/sdb1
